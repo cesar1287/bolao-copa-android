@@ -35,5 +35,6 @@ class MainActivity : AppCompatActivity() {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
         startActivity(Intent(this, SignUpActivity::class.java))
+        finish()
     }
 }

@@ -3,10 +3,20 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+
     <string name="sign_up_name">Nome</string>
     <string name="sign_up_email">Email</string>
     <string name="sign_up_password">Senha</string>
     <string name="sign_up">Criar conta</string>
     <string name="sign_up_has_account">Já tem conta?</string>
     <string name="sign_in">Entrar</string>
+
+    <string name="error_required_fields">Campos obrigatórios não preenchidos</string>
+    <string name="error_user_password_invalid">Usuário e/ou senha inválidos</string>
+    <string name="unknown_error">Erro desconhecido, tente novamente</string>
+    <string name="error_password_too_weak">Senha muito pequena, precisa ter no mínimo 6 caracteres</string>
+    <string name="error_email_invalid">Email inválido ou mal formatado, verifique</string>
+    <string name="error_user_already_registered">Já existe um usuário cadastrado com esse email, faça login ou recupere sua senha</string>
+    <string name="error_email_not_found">Email não encontrado, operação cancelada</string>
+    <string name="error_default">Não foi possível completar sua ação. Tente novamente mais tarde</string>
 </resources>
