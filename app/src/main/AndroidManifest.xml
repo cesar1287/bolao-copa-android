@@ -11,15 +11,20 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".views.activities.MainActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".views.fragments.SignUpActivity" />
-        <activity android:name=".views.activities.SignInActivity"></activity>
+        <activity
+            android:name=".views.fragments.SignUpActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".views.activities.SignInActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
