@@ -16,10 +16,10 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:src="@drawable/pontogo_logo"
+            android:src="@drawable/world_cup_2018"
             android:layout_centerHorizontal="true"
             android:layout_alignParentTop="true"
-            android:layout_width="150dp"
+            android:layout_width="wrap_content"
             android:layout_height="180dp" />
 
         <LinearLayout
@@ -32,9 +32,9 @@
 
             <EditText
                 android:id="@+id/nameEdit"
-                android:hint="@string/nome"
+                android:hint="@string/sign_up_name"
                 android:inputType="text"
-                android:drawableStart="@drawable/ic_account_outline_white_24dp"
+                android:drawableStart="@drawable/ic_account_outline"
                 android:drawablePadding="16dp"
                 android:layout_marginBottom="16dp"
                 style="@style/Widget.EditDefault"
@@ -43,7 +43,7 @@
 
             <EditText
                 android:id="@+id/emailEdit"
-                android:hint="@string/email"
+                android:hint="@string/sign_up_email"
                 android:inputType="textEmailAddress"
                 android:drawableStart="@drawable/ic_email_outline"
                 android:drawablePadding="16dp"
@@ -54,7 +54,7 @@
 
             <EditText
                 android:id="@+id/passwordEdit"
-                android:hint="@string/password"
+                android:hint="@string/sign_up_password"
                 style="@style/Widget.EditDefault"
                 android:drawableStart="@drawable/ic_lock_outline"
                 android:drawablePadding="16dp"
@@ -97,7 +97,7 @@
                 android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/textView"
-                    android:text="@string/ja_tem_conta"
+                    android:text="@string/sign_up_has_account"
                     android:textSize="12sp"
                     android:alpha="0.7"
                     android:textColor="@android:color/white"
