@@ -1,4 +1,4 @@
-package comcesar1287.github.bolocopadomundo2018.views.fragments
+package comcesar1287.github.bolocopadomundo2018.views.activities
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
@@ -10,7 +10,6 @@ import android.view.View
 import comcesar1287.github.bolocopadomundo2018.R
 import comcesar1287.github.bolocopadomundo2018.firestore.auth.FirebaseAuthService
 import comcesar1287.github.bolocopadomundo2018.firestore.auth.ServiceListener
-import comcesar1287.github.bolocopadomundo2018.views.activities.MainActivity
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
 

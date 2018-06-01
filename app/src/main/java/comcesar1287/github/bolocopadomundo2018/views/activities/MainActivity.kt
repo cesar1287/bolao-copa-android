@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
 import comcesar1287.github.bolocopadomundo2018.R
-import comcesar1287.github.bolocopadomundo2018.views.fragments.SignUpActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
