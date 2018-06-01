@@ -17,7 +17,7 @@ class GeneralService {
         })
     }
 
-    fun addUser(uid: String, name:String, email:String){
+    fun addUser(uid: String, name:String, email:String): DocumentReference{
         //Services
         val userService = UserService()
         val betService = BetService()
@@ -134,5 +134,7 @@ class GeneralService {
 
         userService.add(user)
         betService.add(bet)
+
+        return betDocumentReference
     }
 }

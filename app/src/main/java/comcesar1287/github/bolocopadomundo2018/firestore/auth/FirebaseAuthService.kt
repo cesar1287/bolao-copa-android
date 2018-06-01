@@ -3,14 +3,18 @@ package comcesar1287.github.bolocopadomundo2018.firestore.auth
 import android.app.Activity
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.*
+import com.google.firebase.firestore.DocumentReference
 import comcesar1287.github.bolocopadomundo2018.firestore.firestore.services.GeneralService
 import comcesar1287.github.bolocopadomundo2018.R
 import comcesar1287.github.bolocopadomundo2018.firestore.firestore.services.CallbackService
+import comcesar1287.github.bolocopadomundo2018.firestore.firestore.services.UserService
 import comcesar1287.github.bolocopadomundo2018.models.User
+import comcesar1287.github.bolocopadomundo2018.preferences.MainPreference
 
 class FirebaseAuthService(private var context: Activity) {
 
     private var mAuth: FirebaseAuth = FirebaseAuth.getInstance()
+    private var betDocumentReference: DocumentReference? = null
 
     fun register(name: String, email: String, password: String, serviceListener: ServiceListener) {
         mAuth.createUserWithEmailAndPassword(email, password)
@@ -20,7 +24,7 @@ class FirebaseAuthService(private var context: Activity) {
                             val uid = mAuth.currentUser?.uid
 
                             uid?.let {
-                                GeneralService().addUser(uid, name, email)
+                                betDocumentReference = GeneralService().addUser(uid, name, email)
                                 signWithEmailAndPassword(name, email, password, serviceListener)
                             } ?: run {
                                 serviceListener.onError(context.getString(R.string.unknown_error))
@@ -28,8 +32,6 @@ class FirebaseAuthService(private var context: Activity) {
                         } catch (exception: Exception) {
                             serviceListener.onError(context.getString(R.string.error_default))
                         }
-
-
                     } else {
                         try {
                             when (task.exception) {
@@ -78,8 +80,8 @@ class FirebaseAuthService(private var context: Activity) {
             GeneralService().findEmployeeByUID(user, object : CallbackService<User> {
                 override fun onComplete(item: User?) {
                     item?.let {
-                        //val userDocumentReference = UserService().collectionReference.document(item?.id!!)
-                        //saveInPreferences(employeeDTO, userDocumentReference.path)
+                        val userDocumentReference = UserService().collectionReference.document(user.id!!)
+                        saveInPreferences(userDocumentReference, betDocumentReference!!)
                         serviceListener.onAuthComplete()
                     } ?: run {
                         serviceListener.onError(context.getString(R.string.unknown_error))
@@ -89,30 +91,11 @@ class FirebaseAuthService(private var context: Activity) {
         })
     }
 
-//    fun saveInPreferences(employeeDTO: EmployeeDTO, path: String) {
-//        MainPreference.setUserReference(context, path)
-//        MainPreference.setCompanyReference(context, employeeDTO.employee?.company?.path)
-//        MainPreference.setEmployeeReference(context, employeeDTO.user?.jobs!![0].path)
-//        try {
-//            MainPreference.setShiftReference(context, employeeDTO.employee?.allocations?.last()!!.shift?.path)
-//        } catch (e: KotlinNullPointerException) {
-//            val db = FirebaseFirestore.getInstance()
-//            val allocation = Allocation()
-//
-//            allocation.jobTitle = employeeDTO.employee?.allocation?.jobTitle
-//            allocation.shift = employeeDTO.employee?.allocation?.shift
-//            allocation.admissionDate = employeeDTO.employee?.allocation?.admissionDate
-//
-//            val employee: Employee? = employeeDTO.employee
-//            employee?.allocations = listOf(allocation)
-//
-//            db.collection(EmployeeService().collection)
-//                    .document(employeeDTO.employee?.id!!)
-//                    .set(employee!!)
-//        }
-//        MainPreference.setEmployeeRole(context, employeeDTO.employee?.role!!)
-//    }
-//
+    fun saveInPreferences(userDocumentReference: DocumentReference, betDocumentReference: DocumentReference) {
+        MainPreference.setUserReference(context, userDocumentReference.path)
+        MainPreference.setBetReference(context, betDocumentReference.path)
+    }
+
 //    fun forgotPassword(email: String, serviceListener: ServiceListener){
 //        if (ConnectionUtils.isGooglePlayServicesAvailable(context)) {
 //            mAuth.sendPasswordResetEmail(email).addOnCompleteListener { task ->

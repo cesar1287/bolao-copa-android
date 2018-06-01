@@ -4,7 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import comcesar1287.github.bolocopadomundo2018.R
+import comcesar1287.github.bolocopadomundo2018.preferences.MainPreference
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -33,7 +35,10 @@ class MainActivity : AppCompatActivity() {
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
-        startActivity(Intent(this, SignUpActivity::class.java))
-        finish()
+        if (MainPreference.getUserReference(this) == null) {
+            startActivity(Intent(this, SignUpActivity::class.java))
+            finish()
+            return
+        }
     }
 }
