@@ -1,5 +1,6 @@
 package comcesar1287.github.bolocopadomundo2018.views.fragments
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -7,6 +8,9 @@ import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewCompat
 import android.view.View
 import comcesar1287.github.bolocopadomundo2018.R
+import comcesar1287.github.bolocopadomundo2018.firestore.auth.FirebaseAuthService
+import comcesar1287.github.bolocopadomundo2018.firestore.auth.ServiceListener
+import comcesar1287.github.bolocopadomundo2018.views.activities.MainActivity
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
 
@@ -29,6 +33,22 @@ class SignUpActivity : AppCompatActivity() {
             progressBar.visibility = View.VISIBLE
             signUpButton.isClickable = false
             signInButton.isClickable = false
+
+            FirebaseAuthService(this).register(nameEdit.text.toString(), emailEdit.text.toString(),
+                    passwordEdit.text.toString(),
+                    object : ServiceListener {
+                        override fun onAuthComplete() {
+                            startActivity(Intent(this@SignUpActivity, MainActivity::class.java))
+                            finish()
+                        }
+
+                        override fun onError(error: String?) {
+                            progressBar.visibility = View.GONE
+                            signUpButton.isClickable = true
+                            signInButton.isClickable = true
+                            Snackbar.make(signInButton, error.orEmpty(), Snackbar.LENGTH_SHORT).show()
+                        }
+                    })
         }
 
 

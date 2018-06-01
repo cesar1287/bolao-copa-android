@@ -53,7 +53,7 @@ class UserService : FirestoreService<User> {
 
     }
 
-    fun findByUid(uid: String?, callbackService: CallbackService<Boolean>) {
+    fun findByUid(uid: String?, callbackService: CallbackService<User>) {
         val userService = UserService()
         uid?.let {
             userService.collectionReference.document(it).get().addOnCompleteListener {
@@ -61,12 +61,13 @@ class UserService : FirestoreService<User> {
                     val document = it.result
                     document?.let {
                         if (it.exists()) {
-                            callbackService.onComplete(true)
+                            val user = document.toObject(User::class.java)
+                            callbackService.onComplete(user)
                         } else {
-                            callbackService.onComplete(false)
+                            callbackService.onComplete(null)
                         }
                     } ?: run {
-                        callbackService.onComplete(false)
+                        callbackService.onComplete(null)
                     }
                 }
             }

@@ -1,12 +1,12 @@
 package comcesar1287.github.bolocopadomundo2018.firestore.auth
 
 import android.app.Activity
-import android.support.design.widget.Snackbar
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.*
-import com.google.firebase.firestore.FirebaseFirestore
 import comcesar1287.github.bolocopadomundo2018.firestore.firestore.services.GeneralService
 import comcesar1287.github.bolocopadomundo2018.R
+import comcesar1287.github.bolocopadomundo2018.firestore.firestore.services.CallbackService
+import comcesar1287.github.bolocopadomundo2018.models.User
 
 class FirebaseAuthService(private var context: Activity) {
 
@@ -20,7 +20,7 @@ class FirebaseAuthService(private var context: Activity) {
                             val uid = mAuth.currentUser?.uid
 
                             uid?.let {
-                                GeneralService(context).addUser(uid, name, email)
+                                GeneralService().addUser(uid, name, email)
                                 signWithEmailAndPassword(name, email, password, serviceListener)
                             } ?: run {
                                 serviceListener.onError(context.getString(R.string.unknown_error))
@@ -73,44 +73,19 @@ class FirebaseAuthService(private var context: Activity) {
                 return@OnCompleteListener
             }
 
-//            val user = User()
-//            user.email = email
-//
-//            GeneralService(context).findEmployeeByUser(user, object : CallbackService<EmployeeDTO> {
-//                override fun onComplete(item: EmployeeDTO?) {
-//                    item?.let {
-//                        val employeeDTO = it
-//
-//                        if (it.employee?.role == Role.EMPLOYEE) {
-//                            val uid = mAuth.currentUser?.uid
-//
-//                            GeneralService(context).findEmployeeByUID(it.user!!, object : CallbackService<User> {
-//                                override fun onComplete(item: User?) {
-//                                    item?.id = uid
-//
-//                                    uid?.let {
-//                                        val db = FirebaseFirestore.getInstance()
-//                                        db.collection(UserService().collection)
-//                                                .document(it)
-//                                                .set(item!!)
-//                                                .addOnCompleteListener {
-//                                                    val userDocumentReference = UserService().collectionReference.document(uid)
-//
-//                                                    if (it.isSuccessful) {
-//                                                        saveInPreferences(employeeDTO, userDocumentReference.path)
-//                                                        serviceListener.onAuthComplete()
-//                                                    }
-//                                                }
-//                                    }
-//                                }
-//                            })
-//                        } else {
-//                            saveInPreferences(item, item.userReference?.path!!)
-//                            serviceListener.onAuthComplete()
-//                        }
-//                    }
-//                }
-//            })
+            val user = User()
+            user.id = mAuth.currentUser?.uid
+            GeneralService().findEmployeeByUID(user, object : CallbackService<User> {
+                override fun onComplete(item: User?) {
+                    item?.let {
+                        //val userDocumentReference = UserService().collectionReference.document(item?.id!!)
+                        //saveInPreferences(employeeDTO, userDocumentReference.path)
+                        serviceListener.onAuthComplete()
+                    } ?: run {
+                        serviceListener.onError(context.getString(R.string.unknown_error))
+                    }
+                }
+            })
         })
     }
 

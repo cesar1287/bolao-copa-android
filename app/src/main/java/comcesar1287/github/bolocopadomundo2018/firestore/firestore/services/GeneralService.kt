@@ -1,59 +1,21 @@
 package comcesar1287.github.bolocopadomundo2018.firestore.firestore.services
 
-import android.content.Context
 import com.google.firebase.firestore.DocumentReference
 import comcesar1287.github.bolocopadomundo2018.models.Bet
 import comcesar1287.github.bolocopadomundo2018.models.Group
 import comcesar1287.github.bolocopadomundo2018.models.Playoff
 import comcesar1287.github.bolocopadomundo2018.models.User
 
-class GeneralService(var context: Context) {
+class GeneralService {
 
-//    private val companyService = CompanyService()
-//    private val hashMap = HashMap<String, Any>()
-
-//    fun findEmployeeByUser(user: User, callbackService: CallbackService<EmployeeDTO>){
-//        val userService = UserService()
-//        userService.findByEmail(user.email!!, object :
-//            CallbackService<List<User>>{ override fun onComplete(item: List<User>?) {
-//                item?.let {
-//                    if (!it.isEmpty()) {
-//                        val user = it[0]
-//                        val employeeDTO = EmployeeDTO()
-//                        employeeDTO.user = user
-//                        employeeDTO.userReference = user.id?.let { reference -> userService.collectionReference.document(reference) }
-//
-//                        val employeeReference = user.jobs?.get(0)
-//                        employeeReference?.let {
-//                            EmployeeService().findByReference(it, object : CallbackService<Employee> {
-//                                override fun onComplete(item: Employee?) {
-//                                    if (employeeDTO.employee == null) {
-//                                        item?.let {
-//                                            employeeDTO.employee = it
-//                                            callbackService.onComplete(employeeDTO)
-//                                        }
-//                                    }
-//                                }
-//                            })
-//                        }
-//                    }
-//                }
-//            }
-//        })
-//    }
-//
-//    fun findEmployeeByUID(user: User, callbackService: CallbackService<User>){
-//        val userService = UserService()
-//        userService.findByEmail(user.email!!, object : CallbackService<List<User>>{ override fun onComplete(item: List<User>?) {
-//            item?.let {
-//                if (!it.isEmpty()) {
-//                    val result = it[0]
-//                    callbackService.onComplete(result)
-//                }
-//            }
-//        }
-//        })
-//    }
+    fun findEmployeeByUID(user: User, callbackService: CallbackService<User>){
+        val userService = UserService()
+        userService.findByUid(user.id, object : CallbackService<User>{
+            override fun onComplete(item: User?) {
+                callbackService.onComplete(item)
+            }
+        })
+    }
 
     fun addUser(uid: String, name:String, email:String){
         //Services
