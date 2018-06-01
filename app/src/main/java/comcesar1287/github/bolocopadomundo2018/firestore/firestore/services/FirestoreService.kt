@@ -25,5 +25,4 @@ interface FirestoreService<T: BaseModel> {
     fun remove(query: Query)
     fun querySnapshot(query: Query, callbackService: CallbackService<List<T>>)
     fun query(query: Query, callbackService: CallbackService<List<T>>)
-
 }

@@ -2,17 +2,17 @@ package comcesar1287.github.bolocopadomundo2018.firestore.firestore.services
 
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.Query
-import comcesar1287.github.bolocopadomundo2018.firestore.firestore.mappers.BetToMap
-import comcesar1287.github.bolocopadomundo2018.models.Bet
+import comcesar1287.github.bolocopadomundo2018.firestore.firestore.mappers.PlayoffToMap
+import comcesar1287.github.bolocopadomundo2018.models.Playoff
 
-class BetService: FirestoreService<Bet> {
+class PlayoffService: FirestoreService<Playoff> {
 
     override val collection: String
-        get() = "bets"
+        get() = "playoffs"
 
-    override fun add(item: Bet) {
+    override fun add(item: Playoff) {
         val id = if (item.id != null) item.id else db.collection(collection).document().id
-        val map = BetToMap().map(item)
+        val map = PlayoffToMap().map(item)
 
         db.collection(collection)
                 .document(id.orEmpty())
@@ -22,11 +22,11 @@ class BetService: FirestoreService<Bet> {
                 }
     }
 
-    override fun remove(item: Bet) {
+    override fun remove(item: Playoff) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun findByReference(reference: DocumentReference, callbackService: CallbackService<Bet>) {
+    override fun findByReference(reference: DocumentReference, callbackService: CallbackService<Playoff>) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
@@ -34,11 +34,13 @@ class BetService: FirestoreService<Bet> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun querySnapshot(query: Query, callbackService: CallbackService<List<Bet>>) {
+    override fun querySnapshot(query: Query, callbackService: CallbackService<List<Playoff>>) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun query(query: Query, callbackService: CallbackService<List<Bet>>) {
+    override fun query(query: Query, callbackService: CallbackService<List<Playoff>>) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
+
+
 }
