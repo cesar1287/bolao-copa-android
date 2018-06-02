@@ -81,7 +81,11 @@ class FirebaseAuthService(private var context: Activity) {
                 override fun onComplete(item: User?) {
                     item?.let {
                         val userDocumentReference = UserService().collectionReference.document(user.id!!)
-                        saveInPreferences(userDocumentReference, betDocumentReference!!)
+                        betDocumentReference?.let {
+                            saveInPreferences(userDocumentReference, betDocumentReference!!)
+                        } ?: run {
+                            saveInPreferences(userDocumentReference, item.bets!!)
+                        }
                         serviceListener.onAuthComplete()
                     } ?: run {
                         serviceListener.onError(context.getString(R.string.unknown_error))

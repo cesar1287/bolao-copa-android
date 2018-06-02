@@ -24,7 +24,7 @@ class SignUpActivity : AppCompatActivity() {
         ViewCompat.setTranslationZ(progressBar, 16f)
 
         signUpButton.setOnClickListener {
-            if (nameEdit.text.isBlank().or(emailEdit.text.isBlank().or(passwordEdit.text.isBlank()))){
+            if (nameEdit.text.isBlank().or(emailEdit.text.isBlank().or(passwordEdit.text.isBlank()))) {
                 Snackbar.make(signInButton, R.string.error_required_fields, Snackbar.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -50,6 +50,10 @@ class SignUpActivity : AppCompatActivity() {
                     })
         }
 
+        signInButton.setOnClickListener {
+            startActivity(Intent(this, SignInActivity::class.java))
+            finish()
+        }
 
         KeyboardVisibilityEvent.setEventListener(this,{
             if (it){
