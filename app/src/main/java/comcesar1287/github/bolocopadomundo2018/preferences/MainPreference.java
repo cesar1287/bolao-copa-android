@@ -30,4 +30,8 @@ public class MainPreference {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
         return sharedPref.getString(BET_REFERENCE, null);
     }
+
+    public static void cleanPreference(Context context){
+        PreferenceManager.getDefaultSharedPreferences(context).edit().clear().apply();
+    }
 }
