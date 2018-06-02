@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">Bolão Copa do Mundo 2018</string>
+    <string name="app_name">Bolão ZMS Online</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_leaderboard">Classificação</string>
+    <string name="title_profile">Perfil</string>
 
     <string name="sign_up_name">Nome</string>
     <string name="sign_up_email">Email</string>
@@ -20,8 +20,6 @@
     <string name="error_email_not_found">Email não encontrado, operação cancelada</string>
     <string name="error_default">Não foi possível completar sua ação. Tente novamente mais tarde</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="sign_in_dont_have_account">Não tem conta?</string>
     <string name="sign_in_forgot_password">Esqueceu a senha?</string>
 </resources>

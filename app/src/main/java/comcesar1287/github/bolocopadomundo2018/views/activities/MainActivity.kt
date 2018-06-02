@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import comcesar1287.github.bolocopadomundo2018.R
 import comcesar1287.github.bolocopadomundo2018.preferences.MainPreference
@@ -18,12 +17,12 @@ class MainActivity : AppCompatActivity() {
                 message.setText(R.string.title_home)
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.navigation_dashboard -> {
-                message.setText(R.string.title_dashboard)
+            R.id.navigation_leaderboard -> {
+                message.setText(R.string.title_leaderboard)
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.navigation_notifications -> {
-                message.setText(R.string.title_notifications)
+            R.id.navigation_profile -> {
+                message.setText(R.string.title_profile)
                 MainPreference.cleanPreference(this)
                 FirebaseAuth.getInstance().signOut()
                 startActivity(Intent(this, SignInActivity::class.java))
