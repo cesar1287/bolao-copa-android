@@ -1,0 +1,34 @@
+package comcesar1287.github.bolocopadomundo2018.utils
+
+const val RUSSIA = 1
+const val SAUDI_ARABIA = 2
+const val EGYPT = 3
+const val URUGUAY = 4
+const val PORTUGAL = 5
+const val SPAIN = 6
+const val MOROCCO = 7
+const val IRAN = 8
+const val FRANCE = 9
+const val AUSTRALIA = 10
+const val PERU = 11
+const val DENMARK = 12
+const val ARGENTINA = 13
+const val ICELAND = 14
+const val CROATIA = 15
+const val NIGERIA = 16
+const val BRAZIL = 17
+const val SWITZERLAND = 18
+const val COSTA_RICA = 19
+const val SERBIA = 20
+const val GERMANY = 21
+const val MEXICO = 22
+const val SWEDEN = 23
+const val SOUTH_KOREA = 24
+const val BELGIUM = 25
+const val PANAMA = 26
+const val TUNISIA = 27
+const val ENGLAND = 28
+const val POLAND = 29
+const val SENEGAL = 30
+const val COLOMBIA = 31
+const val JAPAN = 32
