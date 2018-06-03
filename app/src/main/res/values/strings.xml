@@ -22,4 +22,9 @@
 
     <string name="sign_in_dont_have_account">Não tem conta?</string>
     <string name="sign_in_forgot_password">Esqueceu a senha?</string>
+    <string name="label_first_place">1º Lugar:</string>
+    <string name="label_second_place">2º Lugar:</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
