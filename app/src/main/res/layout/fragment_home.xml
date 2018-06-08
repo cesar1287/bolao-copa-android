@@ -1,24 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<android.support.v4.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".views.fragments.HomeFragment">
 
-    <TextView
-        android:id="@+id/labelGroupA"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/medium_vertical_margin"
-        android:text="Grupo A"
-        android:textSize="18sp"
-        android:textColor="@color/black"
-        android:textStyle="bold"/>
-
-    <com.woxthebox.draglistview.DragListView
-        android:id="@+id/dragListView"
-        android:layout_below="@id/labelGroupA"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-</RelativeLayout>
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/labelGroupA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/medium_vertical_margin"
+            android:text="Grupo A"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"/>
+
+        <com.woxthebox.draglistview.DragListView
+            android:id="@+id/dragListViewGroupA"
+            android:layout_below="@id/labelGroupA"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/labelGroupB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/medium_vertical_margin"
+            android:layout_below="@id/dragListViewGroupA"
+            android:text="Grupo B"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"/>
+
+        <com.woxthebox.draglistview.DragListView
+            android:id="@+id/dragListViewGroupB"
+            android:layout_below="@id/labelGroupB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/labelGroupC"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/medium_vertical_margin"
+            android:layout_below="@id/dragListViewGroupB"
+            android:text="Grupo C"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"/>
+
+        <com.woxthebox.draglistview.DragListView
+            android:id="@+id/dragListViewGroupC"
+            android:layout_below="@id/labelGroupC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+</android.support.v4.widget.NestedScrollView>

@@ -8,11 +8,16 @@ import comcesar1287.github.bolocopadomundo2018.R
 import comcesar1287.github.bolocopadomundo2018.models.GroupRecyclerView
 import kotlinx.android.synthetic.main.item_groups.view.*
 
-class GroupAdapter(private val list: List<Pair<Long, GroupRecyclerView>>, private val grabHandleId: Int,
-                   private val dragOnLongPress: Boolean): DragItemAdapter<List<Pair<Int, String>>, GroupAdapter.ViewHolder>() {
+class GroupAdapter(list: MutableList<Pair<Long, GroupRecyclerView>>, private val grabHandleId: Int,
+                   private val dragOnLongPress: Boolean): DragItemAdapter<Pair<Long, GroupRecyclerView>, GroupAdapter.ViewHolder>() {
+
+    init {
+        setHasStableIds(true)
+        itemList = list
+    }
 
     override fun getUniqueItemId(position: Int): Long {
-        return list[position].first
+        return itemList[position].first
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -20,17 +25,18 @@ class GroupAdapter(private val list: List<Pair<Long, GroupRecyclerView>>, privat
         return ViewHolder(view, grabHandleId, dragOnLongPress)
     }
 
-    override fun getItemCount(): Int {
-        return list.size
-    }
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         super.onBindViewHolder(holder, position)
-        holder.bind(list[position])
+        holder.bind(itemList[position])
     }
 
     class ViewHolder(itemView: View, grabHandleId: Int, dragOnLongPress: Boolean) : DragItemAdapter.ViewHolder(itemView,
             grabHandleId, dragOnLongPress) {
+
+        init {
+            setIsRecyclable(false)
+        }
+
         fun bind(pair: Pair<Long, GroupRecyclerView>) = with(itemView) {
             val groupRecyclerView = pair.second
 
@@ -38,6 +44,8 @@ class GroupAdapter(private val list: List<Pair<Long, GroupRecyclerView>>, privat
                 itemView.teamIcon.setImageResource(it)
             }
             itemView.teamName.text = groupRecyclerView.teamName
+
+            itemView.tag = groupRecyclerView.teamName
         }
     }
 }
