@@ -46,6 +46,8 @@ class GroupAdapter(list: MutableList<Pair<Long, GroupRecyclerView>>, private val
             itemView.teamName.text = groupRecyclerView.teamName
 
             itemView.tag = groupRecyclerView.teamName
+
+            itemView.teamPosition.text = "${adapterPosition+1}º"
         }
     }
 }
