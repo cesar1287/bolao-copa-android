@@ -27,7 +27,14 @@ class BetService: FirestoreService<Bet> {
     }
 
     override fun findByReference(reference: DocumentReference, callbackService: CallbackService<Bet>) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        reference.addSnapshotListener{ documentSnapshot, _ ->
+                    if (documentSnapshot != null && documentSnapshot.exists()) {
+                        val bet = documentSnapshot.toObject(Bet::class.java)
+                        bet?.id = documentSnapshot.id
+                        callbackService.onComplete(bet)
+                    } else
+                        callbackService.onComplete(null)
+                }
     }
 
     override fun remove(query: Query) {

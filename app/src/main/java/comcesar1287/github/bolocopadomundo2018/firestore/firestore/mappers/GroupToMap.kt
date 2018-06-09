@@ -13,6 +13,8 @@ class GroupToMap : Mapper<Group, Map<String, Any?>> {
         map[GroupsDocument.FIRST] = from.first
         map[GroupsDocument.SECOND] = from.second
         map[GroupsDocument.NUMBER] = from.number
+        map[GroupsDocument.THIRD] = from.third
+        map[GroupsDocument.FOURTH] = from.fourth
         from.createdAt?.let {
             map[GroupsDocument.CREATED_AT] = from.createdAt
         } ?: run { map[GroupsDocument.CREATED_AT] = FieldValue.serverTimestamp() }

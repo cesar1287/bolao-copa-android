@@ -3,6 +3,7 @@ package comcesar1287.github.bolocopadomundo2018.firestore.firestore.services
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.Query
 import comcesar1287.github.bolocopadomundo2018.firestore.firestore.mappers.GroupToMap
+import comcesar1287.github.bolocopadomundo2018.models.Bet
 import comcesar1287.github.bolocopadomundo2018.models.Group
 
 class GroupService: FirestoreService<Group> {
@@ -27,7 +28,16 @@ class GroupService: FirestoreService<Group> {
     }
 
     override fun findByReference(reference: DocumentReference, callbackService: CallbackService<Group>) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        reference.get().addOnCompleteListener {
+            val result = it.result
+
+            if (result != null && result.exists()) {
+                val group = result.toObject(Group::class.java)
+                group?.id = result.id
+                callbackService.onComplete(group)
+            } else
+                callbackService.onComplete(null)
+        }
     }
 
     override fun remove(query: Query) {

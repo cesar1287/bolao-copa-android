@@ -99,25 +99,4 @@ class FirebaseAuthService(private var context: Activity) {
         MainPreference.setUserReference(context, userDocumentReference.path)
         MainPreference.setBetReference(context, betDocumentReference.path)
     }
-
-//    fun forgotPassword(email: String, serviceListener: ServiceListener){
-//        if (ConnectionUtils.isGooglePlayServicesAvailable(context)) {
-//            mAuth.sendPasswordResetEmail(email).addOnCompleteListener { task ->
-//                if (task.isSuccessful) {
-//                    serviceListener.onAuthComplete()
-//                } else {
-//                    when (task.exception) {
-//                        is FirebaseAuthInvalidUserException -> {
-//                            serviceListener.onError(context.getString(R.string.error_email_not_found))
-//                        }
-//                        else -> serviceListener.onError(task.exception.let { it!!.message }
-//                                ?: run { context.getString(R.string.error_default) })
-//                    }
-//                }
-//            }
-//        } else {
-//            Snackbar.make(context.parent.signInButton, context.getString(R.string.google_play_services_not_installed),
-//                    Snackbar.LENGTH_SHORT).show()
-//        }
-//    }
 }
