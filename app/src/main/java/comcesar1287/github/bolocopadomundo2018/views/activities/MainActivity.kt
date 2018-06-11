@@ -11,6 +11,7 @@ import comcesar1287.github.bolocopadomundo2018.R
 import comcesar1287.github.bolocopadomundo2018.preferences.MainPreference
 import comcesar1287.github.bolocopadomundo2018.views.fragments.HomeFragment
 import comcesar1287.github.bolocopadomundo2018.views.fragments.LeaderboardFragment
+import comcesar1287.github.bolocopadomundo2018.views.fragments.ProfileFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -30,11 +31,9 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_profile -> {
-                //message.setText(R.string.title_profile)
-                MainPreference.cleanPreference(this)
-                FirebaseAuth.getInstance().signOut()
-                startActivity(Intent(this, SignInActivity::class.java))
-                finish()
+                supportFragmentManager.inTransaction {
+                    replace(R.id.content, ProfileFragment())
+                }
                 return@OnNavigationItemSelectedListener true
             }
         }

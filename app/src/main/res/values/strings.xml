@@ -34,6 +34,12 @@
     <string name="group_g">Grupo G</string>
     <string name="group_h">Grupo H</string>
 
+    <string name="info_leaderboard_screen">Esta tela estará disponível após o término da fase de grupos</string>
+
+    <string name="do_you_really_want_logout">Deseja realmente sair?</string>
+    <string name="yes">Sim</string>
+    <string name="no">Não</string>
+
     <integer-array name="team_icon_array">
         <item>@drawable/ic_russia</item>
         <item>@drawable/ic_saudi_arabia</item>
@@ -117,4 +123,8 @@
         <item>Colômbia</item>
         <item>Japão</item>
     </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="profile_logout">Sair</string>
 </resources>
