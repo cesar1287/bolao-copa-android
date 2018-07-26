@@ -21,3 +21,11 @@
 #-renamesourcefileattribute SourceFile
 
 -keep class com.woxthebox.draglistview.** { *; }
+
+-keepclassmembers class comcesar1287.github.bolocopadomundo2018.models.** {
+  *;
+}
+
+-keepclassmembers class comcesar1287.github.bolocopadomundo2018.firebase.mappers** {
+  *;
+}

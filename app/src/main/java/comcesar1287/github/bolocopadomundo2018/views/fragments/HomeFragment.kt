@@ -1,12 +1,22 @@
 package comcesar1287.github.bolocopadomundo2018.views.fragments
 
+import android.Manifest
+import android.app.ProgressDialog
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.content.res.TypedArray
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.support.v7.widget.Toolbar
+import android.view.*
 import com.google.firebase.firestore.DocumentReference
 
 import comcesar1287.github.bolocopadomundo2018.R
@@ -20,6 +30,10 @@ import comcesar1287.github.bolocopadomundo2018.models.GroupRecyclerView
 import comcesar1287.github.bolocopadomundo2018.preferences.MainPreference
 import comcesar1287.github.bolocopadomundo2018.utils.*
 import kotlinx.android.synthetic.main.fragment_home.*
+import java.io.File
+import java.io.FileOutputStream
+import java.text.SimpleDateFormat
+import java.util.*
 
 class HomeFragment : Fragment() {
 
@@ -31,7 +45,15 @@ class HomeFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        val view =  inflater.inflate(R.layout.fragment_home, container, false)
+
+        val toolbar: Toolbar = view.findViewById(R.id.toolbar)
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+        (activity as AppCompatActivity).title = ""
+
+        setHasOptionsMenu(true)
+
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -66,6 +88,126 @@ class HomeFragment : Fragment() {
             }
 
         })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        inflater?.inflate(R.menu.home, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return when(item?.itemId) {
+            R.id.action_share -> {
+                if (checkStoragePermission()) {
+                    print()
+                }
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun checkStoragePermission(): Boolean{
+        return if(ContextCompat.checkSelfPermission(activity!!,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+
+            requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                    MY_PERMISSIONS_REQUEST_STORAGE)
+            false
+        }else{
+            true
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        when(requestCode){
+            MY_PERMISSIONS_REQUEST_STORAGE -> {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission was granted, yay! Do the
+                    print()
+                } else  // permission denied, boo! Disable the // functionality that depends on this permission.
+                    return
+            }
+        }
+    }
+
+    private fun print() {
+        val progressDialog = ProgressDialog.show(activity, "", getString(R.string.generate_screenshot),
+                true, false)
+
+        val bitmap = getBitmapFromView(scrollView, scrollView.getChildAt(0).height, scrollView.getChildAt(0).width)
+
+        val file = getOutputMediaFile(".png")
+
+        val fileOutputStream = FileOutputStream(file)
+
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream)
+        fileOutputStream.flush()
+        fileOutputStream.close()
+
+        progressDialog.dismiss()
+
+        share(file)
+    }
+
+    private fun share(file: File?) {
+        file?.let {
+            if (it.exists()) {
+                val imageUri = Uri.parse(file.absolutePath)
+                val shareIntent = Intent()
+                shareIntent.action = Intent.ACTION_SEND
+                //Target whatsapp:
+                shareIntent.`package` = "com.whatsapp"
+                //Add text and then Image URI
+                shareIntent.putExtra(Intent.EXTRA_TEXT, R.string.app_name)
+                shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri)
+                shareIntent.type = "image/png"
+                shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+
+                try {
+                    startActivity(shareIntent)
+                } catch (ex: android.content.ActivityNotFoundException) {
+                    ex.printStackTrace()
+                }
+
+            }
+        }
+    }
+
+    private fun getBitmapFromView(view: View, height: Int, width: Int): Bitmap {
+        val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        val backgroundDrawable = view.background
+
+        backgroundDrawable?.let {
+            backgroundDrawable.draw(canvas)
+        } ?: run {
+            canvas.drawColor(Color.WHITE)
+        }
+
+        view.draw(canvas)
+        return bitmap
+    }
+
+    @Throws(Exception::class)
+    private fun getOutputMediaFile(format: String): File? {
+        // External sdcard location
+        val mediaStorageDir = File(
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
+                DIRECTORY_NAME)
+        // Create the storage directory if it does not exist
+        if (!mediaStorageDir.exists()) {
+            if (!mediaStorageDir.mkdirs()) {
+                return null
+            }
+        }
+
+        // Create a media file name
+        val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss",
+                Locale.getDefault()).format(Date())
+
+        return File(mediaStorageDir.path + File.separator
+                + "BET_" + timeStamp + format)
     }
 
     private fun setupGroupA(groupAReference: DocumentReference) {

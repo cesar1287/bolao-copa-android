@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Bolão ZMS Online</string>
+    <string name="app_name">Bolão ZMS</string>
     <string name="title_home">Home</string>
     <string name="title_leaderboard">Classificação</string>
     <string name="title_profile">Perfil</string>
@@ -39,6 +39,11 @@
     <string name="do_you_really_want_logout">Deseja realmente sair?</string>
     <string name="yes">Sim</string>
     <string name="no">Não</string>
+
+    <string name="profile_logout">Sair</string>
+    <string name="title_share">Compartilhar</string>
+    <string name="share">Compartilhar aposta</string>
+    <string name="generate_screenshot">Gerando screenshot…</string>
 
     <integer-array name="team_icon_array">
         <item>@drawable/ic_russia</item>
@@ -123,8 +128,4 @@
         <item>Colômbia</item>
         <item>Japão</item>
     </string-array>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="profile_logout">Sair</string>
 </resources>
